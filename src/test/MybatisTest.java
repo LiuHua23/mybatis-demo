@@ -1,46 +1,31 @@
-import com.hwa.mybatis.consts.GenderEnum;
 import com.hwa.mybatis.dao.StudentDao;
+import com.hwa.mybatis.dao.impl.StudentDaoImpl;
 import com.hwa.mybatis.model.Student;
-import com.hwa.mybatis.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.Test;
+
+import java.util.List;
 
 /**
  * @author LiuHua
  * @date 2018/5/10
  */
 public class MybatisTest {
+    StudentDao studentDao = new StudentDaoImpl();
 
-    private static SqlSessionFactory sqlSessionFactory = MyBatisUtil.getSqlSessionFactory();
-
-    public static void main(String[] args) {
-        insertStudent();
-//        deleteStudentByNumber();
-//        updateStudentByNumber();
-//        getStudentByNumber();
-    }
-
-    private static void insertStudent() {
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
+//    @Test
+    public void testInsertStudent() {
         Student student = new Student();
-        student.setName("张三");
-        student.setAge(20);
-        student.setGender(GenderEnum.MALE);
-        student.setNumber("20180510004");
+        student.setStudentName("tom");
         studentDao.insertStudent(student);
-        sqlSession.commit();
-        sqlSession.close();
+        System.out.println("插入的主键为：" + student.getStudentId());
     }
 
-    private static void deleteStudentByNumber() {
+    @Test
+    public void testSelectAllStudents() {
+        List<Student> studentList = studentDao.selectAllStudents();
+        for(int i = 0; i < studentList.size(); i++){
+            System.out.println(studentList.get(i));
+        }
     }
-
-    private static void updateStudentByNumber() {
-    }
-
-    private static void getStudentByNumber() {
-    }
-
-
 }

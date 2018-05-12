@@ -1,7 +1,5 @@
 package com.hwa.mybatis.model;
 
-import com.hwa.mybatis.consts.GenderEnum;
-
 /**
  * 学生信息实体
  * @author LiuHua
@@ -9,59 +7,32 @@ import com.hwa.mybatis.consts.GenderEnum;
  */
 public class Student {
 
+    //ID
+    private int studentId;
     //姓名
-    private String name;
+    private String studentName;
 
-    //年龄
-    private int age;
-
-    //性别
-    private GenderEnum gender;
-
-    //学号
-    private String number;
-
-    public Student() {}
-
-    public String getName() {
-        return name;
+    public int getStudentId() {
+        return studentId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
-    public int getAge() {
-        return age;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public GenderEnum getGender() {
-        return gender;
-    }
-
-    public void setGender(GenderEnum gender) {
-        this.gender = gender;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", gender=" + gender +
-                ", number='" + number + '\'' +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
                 '}';
     }
 }
