@@ -16,8 +16,19 @@
     </select>
     
     <insert id="insertStudent" parameterType="Student" keyProperty="studentId" useGeneratedKeys="true">
-        insert into student(student_id,student_name)
+        insert into student(student_id, student_name)
         values(#{studentId, jdbcType=INTEGER}, #{studentName, jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="batchInsert" useGeneratedKeys="true" parameterType="java.util.List">
+        <selectKey resultType="int" keyProperty="studentId" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into student(student_id, student_name) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.studentId, jdbcType=INTEGER}, #{item.studentName, jdbcType=VARCHAR})
+        </foreach>
     </insert>
 
 </mapper>

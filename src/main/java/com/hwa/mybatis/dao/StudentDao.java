@@ -15,4 +15,7 @@ public interface StudentDao {
 
     //新增学生信息
     public int insertStudent(Student student);
+
+    //批量新增
+    public int batchInsertStudent(List<Student> studentList);
 }

@@ -2,32 +2,39 @@ package com.hwa.mybatis.dao.impl;
 
 import com.hwa.mybatis.dao.StudentDao;
 import com.hwa.mybatis.model.Student;
-import com.hwa.mybatis.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * @author LiuHua
  * @date 2018/5/11
  */
-public class StudentDaoImpl extends MyBatisUtil implements StudentDao {
+@Repository
+public class StudentDaoImpl extends SqlSessionDaoSupport implements StudentDao {
     private static final String NAMESPACE = "StudentMapper.";
+
+    @Resource
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        super.setSqlSessionFactory(sqlSessionFactory);
+    }
 
     @Override
     public List<Student> selectAllStudents() {
-        SqlSession sqlSession = getSqlSession();
-        List<Student> list = sqlSession.selectList(NAMESPACE + "selectAllStudents");
-        sqlSession.close();
-        return list;
+        return getSqlSession().selectList(NAMESPACE + "selectAllStudents");
     }
 
     @Override
     public int insertStudent(Student student) {
-        SqlSession sqlSession = getSqlSession();
-        int i = sqlSession.insert(NAMESPACE + "insertStudent", student);
-        sqlSession.commit();
-        sqlSession.close();
-        return i;
+        return getSqlSession().insert(NAMESPACE + "insertStudent", student);
+    }
+
+    @Override
+    public int batchInsertStudent(List<Student> studentList) {
+        return getSqlSession().insert(NAMESPACE  + "batchInsert", studentList);
     }
 }

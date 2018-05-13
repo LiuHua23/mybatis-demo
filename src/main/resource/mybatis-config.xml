@@ -6,9 +6,10 @@
     <!--声明了类的别名-->
     <typeAliases>
         <typeAlias alias="Student" type="com.hwa.mybatis.model.Student"/>
+        <typeAlias alias="Teacher" type="com.hwa.mybatis.model.Teacher"/>
     </typeAliases>
     <!--mybatis使用的数据库和数据源配置-->
-    <environments default="development">
+    <!--<environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -18,8 +19,8 @@
                 <property name="password" value="root"/>
             </dataSource>
         </environment>
-    </environments>
-    <mappers>
+    </environments>-->
+    <!--<mappers>
         <mapper resource="mappers/StudentMapper.xml"/>
-    </mappers>
+    </mappers>-->
 </configuration>
