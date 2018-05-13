@@ -2,6 +2,7 @@ import com.hwa.mybatis.dao.StudentDao;
 import com.hwa.mybatis.dao.TeacherDao;
 import com.hwa.mybatis.model.Student;
 import com.hwa.mybatis.model.Teacher;
+import com.hwa.mybatis.service.SchoolService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -46,7 +47,7 @@ public class MybatisTest {
         }
     }
 
-    @Test
+//    @Test
     public void testBatchInsertStudents() {
         StudentDao studentDao = (StudentDao) context.getBean("studentDaoImpl");
         List<Student> studentList = new ArrayList<>();
@@ -65,6 +66,17 @@ public class MybatisTest {
             System.out.println(studentList.get(i));
         }
 
+    }
+
+    @Test
+    public void testSchool() {
+        SchoolService schoolService = (SchoolService) context.getBean("schoolServiceImpl");
+        Student student = new Student();
+        student.setStudentName("李同学");
+        Teacher teacher = new Teacher();
+        teacher.setTeacherName("李老师");
+
+        schoolService.insertTeacherAndStudent(teacher, student);
     }
 
 }
